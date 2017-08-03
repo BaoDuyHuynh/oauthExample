@@ -1,33 +1,6 @@
-//called when successful user log in
-function onSignIn(googleUser) {
-    console.log('User signed in!');
-    var profile = googleUser.getBasicProfile();
-    //change userName text, img source, & email text based on profile
-    $(".userName").text(profile.getName());
-    $("img").attr("src", profile.getImageUrl());
-    $(".email").text(profile.getEmail());
-    randomUser();
-    $("g-signin2").hide();
-}
-
-//called when "sign out" button clicked
-function onSignOut() {
-    //should sign user out and toggleHidden
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out.')
-        //setting back to default
-        $(".userName").text("USER_NAME");
-        $("img").attr("src", "assets/placeholder.png");
-        $(".email").text("example@example.com");
-    });
-}
-
-
-
 var randomuserURL = 'https://randomuser.me/api/';
 var countriesURL = 'https://restcountries.eu/rest/v2/alpha?codes=';
-var randomUser = function(){
+var randomUser = function(data){
 $.ajax({
 url: randomuserURL,
 }).done(function(data){
@@ -65,3 +38,16 @@ url: randomuserURL,
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+
+
+// // new API
+// var natData = function(data){
+// $.ajax({
+// url: countriesURL,
+// }).done(function(data){
+//     //console.log(data);
+    
+// }); 
+//     var country = "https://restcountries.eu/rest/v2/alpha?codes=" + data.results[0].nat;
+//     console.log(country); 
+// }
